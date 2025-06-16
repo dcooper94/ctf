@@ -1,0 +1,5 @@
+CTF Access and Flag Submission Log
+2025-06-17 09:15:42.508541 - Access: index
+2025-06-17 09:18:34.435138 - Access: index
+2025-06-17 09:18:36.546880 - Submission: coops{panel_override_9F4}
+2025-06-17 09:19:01.641492 - Submission: coops{drift_key_fallback}
