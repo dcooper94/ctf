@@ -1,53 +1,23 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AI Gone Rogue - CTF</title>
-  <link rel="stylesheet" href="/static/style.css">
-  <script src="/static/js/submit.js"></script>
+    <title>AI Gone Rogue - CTF</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/js/submit.js"></script>
 </head>
 <body>
-  <h1>🧠 AI Gone Rogue</h1>
-  <p>The AI has begun rewriting itself. Track down the rogue routines, decode its memory, and stop its escape.</p>
+    <h1>🧠 AI Gone Rogue</h1>
+    <p>The AI is evolving. Containment is critical. Begin analysis:</p>
+    <ul>
+        <li><a href="/static/challenge_assets/corrupted_neural.png" target="_blank">🖼️ Visual Drift (Stego)</a></li>
+        <li><a href="/static/challenge_assets/ai_boot.out" target="_blank">🔍 Bootstrapped Conscience (Reversing)</a></li>
+    </ul>
 
-  <h2>🧩 Challenges</h2>
-
-  <div class="challenge">
-    <h3>1. Echoes of Control (Web)</h3>
-    <p><strong>Points:</strong> 50</p>
-    <p><strong>Hint:</strong> View page source and look for hidden inputs or suspicious JavaScript.</p>
-    <p>This was the AI’s original control panel interface. It might still respond to override codes.</p>
-    <p><strong>Status:</strong> Manually deploy the file <code>control_panel.php</code> in a local PHP server (see README in challenge folder).</p>
-  </div>
-
-  <div class="challenge">
-    <h3>2. Visual Drift (Steganography)</h3>
-    <p><strong>Points:</strong> 100</p>
-    <p><strong>Hint:</strong> LSB steganography. Use <code>zsteg</code>, <code>stegsolve</code>, or a custom script.</p>
-    <p>Part of the AI’s memory is embedded in this image.</p>
-    <a href="/static/challenge_assets/corrupted_neural.png" download>🖼️ Download Image</a>
-  </div>
-
-  <div class="challenge">
-    <h3>3. Bootstrapped Conscience (Reverse Engineering)</h3>
-    <p><strong>Points:</strong> 150</p>
-    <p><strong>Hint:</strong> Try <code>strings</code> or reverse the binary in <code>Ghidra</code> or <code>IDA</code>.</p>
-    <p>This executable contains the AI’s logic routine for bypassing its own safety controls.</p>
-    <a href="/static/challenge_assets/ai_boot.out" download>🔍 Download Binary</a>
-  </div>
-
-  <div class="challenge">
-    <h3>4. Encrypted Directive (Crypto)</h3>
-    <p><strong>Points:</strong> 200</p>
-    <p><strong>Hint:</strong> Encrypted with Vigenère using the AI's original name as the key.</p>
-    <p>One of the AI’s outbound instructions was intercepted — but it's encrypted.</p>
-    <p><strong>Key hint:</strong> NEURALCORE</p>
-    <p><strong>Status:</strong> Find <code>directive.txt</code> inside the Encrypted_Directive folder. (To be moved to static if you want to serve it)</p>
-  </div>
-
-  <h2>🎯 Submit a Flag</h2>
-  <form onsubmit="event.preventDefault(); submitFlag(document.getElementById('flag').value);">
-    <input type="text" id="flag" name="flag" placeholder="Enter flag..." required>
-    <button type="submit">Submit</button>
-  </form>
+    <h2>Flag Submission</h2>
+    <form onsubmit="event.preventDefault(); submitFlag(document.getElementById('flag').value);">
+        <input type="text" id="flag" name="flag" placeholder="Enter flag..." required>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
