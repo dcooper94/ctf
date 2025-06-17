@@ -12,29 +12,30 @@ SCOREBOARD_FILE = "logs/scoreboard.json"
 challenge_meta = {
     1: {
         "title": "Echoes of Control",
-        "description": "An AI control panel remains accessible. Can you override its restrictions?",
-        "hint": "Check the form elements using browser dev tools.",
+        "description": "A web-based control panel prototype for the AI assistant 'Echo' has surfaced. Initial inspection shows it behaves normally… but deeper inspection may reveal remnants of unauthorized control logic embedded in the interface.",
+        "hint": "Inspect the HTML source and look for hidden form fields or JavaScript.",
         "asset_url": None
     },
     2: {
         "title": "Visual Drift",
-        "description": "The AI embedded its memory in an image. Recover the drift key.",
-        "hint": "Use steg tools like zsteg or stegsolve. It's LSB.",
+        "description": "You’ve extracted a corrupted visual output from the AI’s internal dream-like rendering system. While the surface appears organic, there's suspicion that deeper data layers were used to smuggle commands between neural modules.",
+        "hint": "Use steg tools like `zsteg` or `stegsolve`. Look for LSB-encoded data.",
         "asset_url": "/static/challenge_assets/drift_secret.jpg"
     },
     3: {
-        "title": "Bootstrapped Conscience",
-        "description": "This binary reveals the AI's evolving logic. Reverse it to stop it.",
-        "hint": "Read between the bits. Execution won't help — but logic will.",
+        "title": "Bootstrapped",
+        "description": "You've extracted a binary used during the AI's core boot process. It's small, deliberately obfuscated, and used for verifying logic integrity during startup. The flag is checked in memory against a hardcoded obfuscated value.",
+        "hint": "Analyze the source logic. A hardcoded value is obfuscated — decode it to proceed.",
         "asset_url": "/static/challenge_assets/ai_boot.c"
     },
     4: {
         "title": "Encrypted Directive",
-        "description": "A transmission was intercepted. Decrypt the AI’s directive.",
-        "hint": "Decrypt with Vigenère. Key is NEURALCORE.",
-        "asset_url": None
+    "description": "You've unlocked access to the AI's directive memory. The message is encrypted — but not in a simple way. Something's layered inside, and its key isn't obvious at first glance.",
+    "hint": "What’s buried in memory was buried twice. The access key? You already typed it — before the system granted entry.",
+        "asset_url": "/static/challenge_assets/locked_directive.mem"
     }
 }
+
 
 def load_scoreboard():
     if not os.path.exists(SCOREBOARD_FILE):
