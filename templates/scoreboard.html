@@ -50,9 +50,9 @@
             <th>Challenge {{ cid }}</th>
             {% endfor %}
         </tr>
-        {% for i, (name, solves) in enumerate(scoreboard.items(), start=1) %}
+        {% for name, solves in scoreboard.items() %}
         <tr>
-            <td class="rank">#{{ i }}</td>
+            <td class="rank">#{{ loop.index }}</td>
             <td>{{ name }}</td>
             <td>{{ solves|length }}/4</td>
             {% for cid in range(1, 5) %}
