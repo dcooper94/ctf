@@ -64,6 +64,7 @@ def home():
 def challenge_page(cid):
     if cid not in challenge_meta:
         return "Challenge not found", 404
+        log_event("ACCESS", cid)
 
     message = ""
     if request.method == "POST":
@@ -82,7 +83,13 @@ def challenge_page(cid):
             message = "✅ Correct flag submitted!"
         else:
             message = "❌ Incorrect flag."
-
+if flag == correct_flag:
+    ...
+    log_event("SUBMIT", cid, user=name, status="correct")
+    message = "✅ Correct flag submitted!"
+else:
+    log_event("SUBMIT", cid, user=name, status="incorrect")
+    message = "❌ Incorrect flag."
     return render_template(f"challenge_{cid}.html", 
         title=challenge_meta[cid]["title"],
         description=challenge_meta[cid]["description"],
