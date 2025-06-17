@@ -1,7 +1,12 @@
 # AI Gone Rogue - Secure Standalone CTF
 
 ## 🚀 How to Run
-
+Ensure you are running out of a venv
+```python3 -m venv venv
+```
+and then
+```source venv/bin/activate
+```
 1. Install dependencies:
 ```bash
 pip install flask
@@ -16,7 +21,7 @@ python app.py
 
 ## 📦 Notes
 
-- Flags are stored securely in `flags/flag_list.txt`
+- Flags are stored securely in `flags`
 - User submissions are logged to `logs/ctf_log.txt`
 - Challenge artifacts (images, binaries) are served from `static/challenge_assets/`
 - Do **not** expose the `flags/` or `logs/` directory on public web servers
