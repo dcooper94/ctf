@@ -20,13 +20,13 @@ challenge_meta = {
         "title": "Visual Drift",
         "description": "The AI embedded its memory in an image. Recover the drift key.",
         "hint": "Use steg tools like zsteg or stegsolve. It's LSB.",
-        "asset_url": "/static/challenge_assets/corrupted_neural.png"
+        "asset_url": "/static/challenge_assets/drift_secret.jpg"
     },
     3: {
         "title": "Bootstrapped Conscience",
         "description": "This binary reveals the AI's evolving logic. Reverse it to stop it.",
-        "hint": "Try 'strings' or reverse in Ghidra.",
-        "asset_url": "/static/challenge_assets/ai_boot.out"
+        "hint": "Read between the bits. Execution won't help — but logic will.",
+        "asset_url": "/static/challenge_assets/ai_boot.c"
     },
     4: {
         "title": "Encrypted Directive",
