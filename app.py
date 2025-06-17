@@ -52,7 +52,7 @@ def get_flag(cid):
 
 @app.route("/")
 def home():
-    return render_template("index.html", challenge_titles={cid: data["title"] for cid, data in challenge_meta.items()})
+    return render_template("index.html", challenge_meta=challenge_meta)
 
 @app.route("/challenge/<int:cid>", methods=["GET", "POST"])
 def challenge_page(cid):
@@ -65,12 +65,14 @@ def challenge_page(cid):
         flag = request.form.get("flag").strip()
         correct_flag = get_flag(cid)
         scoreboard = load_scoreboard()
+        key = f"challenge_{cid}"
 
         if flag == correct_flag:
-            scoreboard.setdefault(name, [])
-            if f"challenge_{cid}" not in scoreboard[name]:
-                scoreboard[name].append(f"challenge_{cid}")
-            save_scoreboard(scoreboard)
+            if name not in scoreboard:
+                scoreboard[name] = {}
+            if key not in scoreboard[name]:
+                scoreboard[name][key] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                save_scoreboard(scoreboard)
             message = "✅ Correct flag submitted!"
         else:
             message = "❌ Incorrect flag."

@@ -1,45 +1,23 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>AI Gone Rogue - CTF</title>
     <link rel="stylesheet" href="/static/style.css">
-    <style>
-        .challenge-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 2rem;
-        }
-        .challenge-card {
-            background: #1f1f1f;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #000;
-        }
-        .challenge-card h2 {
-            margin-top: 0;
-        }
-        .challenge-card a {
-            display: inline-block;
-            margin-top: 10px;
-            color: #90caf9;
-        }
-    </style>
+    <script src="/static/js/submit.js"></script>
 </head>
 <body>
     <h1>🧠 AI Gone Rogue</h1>
-    <p>The AI has begun rewriting itself. Track down the rogue routines, decode its memory, and stop its escape.</p>
+    <p>The AI is evolving. Containment is critical. Begin analysis:</p>
+    <ul>
+        <li><a href="/static/challenge_assets/corrupted_neural.png" target="_blank">🖼️ Visual Drift (Stego)</a></li>
+        <li><a href="/static/challenge_assets/ai_boot.out" target="_blank">🔍 Bootstrapped Conscience (Reversing)</a></li>
+    </ul>
 
-    <div class="challenge-grid">
-        {% for cid, meta in challenge_meta.items() %}
-        <div class="challenge-card">
-            <h2>{{ meta.title }}</h2>
-            <p>{{ meta.description }}</p>
-            <a href="{{ url_for('challenge_page', cid=cid) }}">🔍 Enter Challenge {{ cid }}</a>
-        </div>
-        {% endfor %}
-    </div>
-
-    <footer style="margin-top:2rem;"><a href="/scoreboard">🏆 View Scoreboard</a></footer>
+    <h2>Flag Submission</h2>
+    <form onsubmit="event.preventDefault(); submitFlag(document.getElementById('flag').value);">
+        <input type="text" id="flag" name="flag" placeholder="Enter flag..." required>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>

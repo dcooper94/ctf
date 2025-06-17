@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CTF Scoreboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        .solved {
+            background-color: #2e7d32;
+            color: #fff;
+        }
+        .unsolved {
+            background-color: #424242;
+            color: #888;
+        }
+        .rank {
+            font-weight: bold;
+        }
+        .timestamp {
+            font-size: 0.8em;
+            color: #ccc;
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏆 CTF Scoreboard</h1>
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>Alias</th>
+            <th>Solved</th>
+            {% for cid in range(1, 5) %}
+            <th>Challenge {{ cid }}</th>
+            {% endfor %}
+        </tr>
+        {% for i, (name, solves) in enumerate(scoreboard.items(), start=1) %}
+        <tr>
+            <td class="rank">#{{ i }}</td>
+            <td>{{ name }}</td>
+            <td>{{ solves|length }}/4</td>
+            {% for cid in range(1, 5) %}
+                {% set key = "challenge_" ~ cid %}
+                {% if key in solves %}
+                    <td class="solved">✅
+                        <span class="timestamp">{{ solves[key] }}</span>
+                    </td>
+                {% else %}
+                    <td class="unsolved">❌</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    <p style="margin-top:2rem;"><a href="/">⬅️ Back to main</a></p>
+</body>
+</html>

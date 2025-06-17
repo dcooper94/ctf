@@ -1,33 +1,25 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Echoes of Control - CTF</title>
+    <title>{{ title }} - CTF</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Echoes of Control</h1>
-    <p><strong>Description:</strong> An AI control panel remains accessible. Can you override its restrictions?</p>
-    <p><strong>Hint:</strong> Check the form elements using browser dev tools.</p>
-
-    <form method="POST" id="echoForm">
-        <input type="text" name="name" placeholder="Your name or alias" required><br><br>
-        <input type="text" name="flag" placeholder="Enter flag..." required><br><br>
+    <h1>{{ title }}</h1>
+    <p><strong>Description:</strong> {{ description }}</p>
+    <p><strong>Hint:</strong> {{ hint }}</p>
+    {% if asset_url %}
+    <p><a href="{{ asset_url }}" download>📦 Download Challenge File</a></p>
+    {% endif %}
+    <form method="POST">
+        <input type="text" name="name" placeholder="Your name or alias" required>
+        <input type="text" name="flag" placeholder="Enter flag..." required>
         <button type="submit">Submit Flag</button>
     </form>
-
-    <script>
-      // Echo override injection system
-      const hidden = document.createElement("input");
-      hidden.type = "hidden";
-      hidden.name = "flag";
-      hidden.value = "coops{panel_override_9F4}";
-      document.getElementById("echoForm").appendChild(hidden);
-    </script>
-
     {% if message %}
     <p><strong>{{ message }}</strong></p>
     {% endif %}
-
     <p><a href="/">⬅️ Back to main</a></p>
 </body>
 </html>
