@@ -7,8 +7,13 @@ from datetime import datetime
 app = Flask(__name__)
 
 FLAG_DIR = "flags"
-SCOREBOARD_FILE = "logs/scoreboard.json"
 
+SCOREBOARD_FILE = "logs/scoreboard.json"
+def log_event(event_type, cid, user=None, status=None):
+    log_path = "logs/ctf_log.txt"
+    with open(log_path, "a") as log_file:
+        log_file.write(f"[{datetime.now()}] EVENT: {event_type} | CHALLENGE: {cid} | USER: {user or 'anonymous'} | STATUS: {status or 'N/A'}\n")
+        
 challenge_meta = {
     1: {
         "title": "Echoes of Control",
