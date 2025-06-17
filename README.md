@@ -2,10 +2,12 @@
 
 ## 🚀 How to Run
 Ensure you are running out of a venv
-```python3 -m venv venv
+```bash
+python3 -m venv venv
 ```
 and then
-```source venv/bin/activate
+```bash
+source venv/bin/activate
 ```
 1. Install dependencies:
 ```bash
