@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }} - CTF</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <p><strong>Description:</strong> {{ description }}</p>
+    <p><strong>Hint:</strong> {{ hint }}</p>
+    {% if asset_url %}
+    <p><a href="{{ asset_url }}" download>📦 Download Challenge File</a></p>
+    {% endif %}
+    <form method="POST">
+        <input type="text" name="name" placeholder="Your name or alias" required>
+        <input type="text" name="flag" placeholder="Enter flag..." required>
+        <button type="submit">Submit Flag</button>
+    </form>
+    {% if message %}
+    <p><strong>{{ message }}</strong></p>
+    {% endif %}
+    <p><a href="/">⬅️ Back to main</a></p>
+</body>
+</html>
