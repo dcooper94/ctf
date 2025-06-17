@@ -7,11 +7,11 @@ Track down a rogue AI's memory leaks, encrypted messages, and bootloader exploit
 
 ## 🚀 How to Run
 
-1. **Install requirements**
+1. **create a venv inside the ctf folder**
    ```bash
-   pip install -r requirements.txt
+   python3 -m venv venv
    ```
-
+and then activate the virtual environment 
 2. **Run the server**
    ```bash
    python3 app.py
