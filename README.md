@@ -12,9 +12,15 @@ Track down a rogue AI's memory leaks, encrypted messages, and bootloader exploit
    python3 -m venv venv
    ```
 and then activate the virtual environment 
-```bash
-source venv/bin/activate
-```
+   ```bash
+   source venv/bin/activate
+   ```
+>[!NOTE]
+>You can exit the virtual environment at any time with:
+
+   ```bash
+   deactivate
+   ```
 
 2. **Run the server**
    ```bash
