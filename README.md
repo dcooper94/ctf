@@ -12,6 +12,9 @@ Track down a rogue AI's memory leaks, encrypted messages, and bootloader exploit
    python3 -m venv venv
    ```
 and then activate the virtual environment 
+```bash
+source venv/bin/activate
+```
 
 2. **Run the server**
    ```bash
