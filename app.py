@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 import os
 import json
 from datetime import datetime
@@ -63,13 +63,14 @@ def home():
 @app.route("/challenge/<int:cid>", methods=["GET", "POST"])
 def challenge_page(cid):
     if cid not in challenge_meta:
+        log_event("ACCESS_FAIL", cid)
         return "Challenge not found", 404
-        log_event("ACCESS", cid)
 
+    log_event("ACCESS", cid)
     message = ""
     if request.method == "POST":
-        name = request.form.get("name").strip()
-        flag = request.form.get("flag").strip()
+        name = request.form.get("name", "").strip()
+        flag = request.form.get("flag", "").strip()
         correct_flag = get_flag(cid)
         scoreboard = load_scoreboard()
         key = f"challenge_{cid}"
@@ -80,22 +81,19 @@ def challenge_page(cid):
             if key not in scoreboard[name]:
                 scoreboard[name][key] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 save_scoreboard(scoreboard)
+            log_event("SUBMIT", cid, user=name, status="correct")
             message = "✅ Correct flag submitted!"
         else:
+            log_event("SUBMIT", cid, user=name, status="incorrect")
             message = "❌ Incorrect flag."
-if flag == correct_flag:
-    ...
-    log_event("SUBMIT", cid, user=name, status="correct")
-    message = "✅ Correct flag submitted!"
-else:
-    log_event("SUBMIT", cid, user=name, status="incorrect")
-    message = "❌ Incorrect flag."
-    return render_template(f"challenge_{cid}.html", 
+
+    return render_template(
+        f"challenge_{cid}.html",
         title=challenge_meta[cid]["title"],
         description=challenge_meta[cid]["description"],
         hint=challenge_meta[cid]["hint"],
         asset_url=challenge_meta[cid]["asset_url"],
-        message=message
+        message=message,
     )
 
 @app.route("/scoreboard")
@@ -105,4 +103,4 @@ def scoreboard():
     return render_template("scoreboard.html", scoreboard=sorted_scores)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

@@ -16,15 +16,6 @@
         <button type="submit">Submit Flag</button>
     </form>
 
-    <script>
-      // Echo override injection system
-      const hidden = document.createElement("input");
-      hidden.type = "hidden";
-      hidden.name = "flag";
-      hidden.value = "coops{panel_override_9F4}";
-      document.getElementById("echoForm").appendChild(hidden);
-    </script>
-
     {% if message %}
     <p><strong>{{ message }}</strong></p>
     {% endif %}
