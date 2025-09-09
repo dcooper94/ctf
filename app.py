@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 import os
 import json
 from datetime import datetime
@@ -95,6 +95,10 @@ def challenge_page(cid):
         asset_url=challenge_meta[cid]["asset_url"],
         message=message,
     )
+
+@app.route("/Echoes_of_Control/control_panel.php")
+def echoes_control_panel():
+    return send_from_directory("Echoes_of_Control", "control_panel.php")
 
 @app.route("/scoreboard")
 def scoreboard():

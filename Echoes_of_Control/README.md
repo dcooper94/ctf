@@ -8,13 +8,14 @@ A web-based control panel prototype for the AI assistant “Echo” has surfaced
 
 Investigate the webpage. Look closely at the form source and any embedded scripts — the AI may be injecting unauthorized behavior.
 
-> File: `control_panel.php`  
-> Hosted locally as part of the challenge
+> File: `control_panel.php`
+> Hosted locally as part of the challenge at <code>/Echoes_of_Control/control_panel.php</code>
 
 ## 🧩 Hint
 
-- Inspect the HTML source
-- Look for hidden inputs or injected scripts
-- A flag may be quietly passed through form submission or hidden values
+- Navigate directly to <code>/Echoes_of_Control/control_panel.php</code>
+- Inspect the HTML source and any client-side scripts
+- Look for hidden inputs or injected values
+
 
 **Flag Format:** `coops{...}`
