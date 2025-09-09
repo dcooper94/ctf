@@ -17,8 +17,8 @@ def log_event(event_type, cid, user=None, status=None):
 challenge_meta = {
     1: {
         "title": "Echoes of Control",
-        "description": "A web-based control panel prototype for the AI assistant 'Echo' has surfaced. Initial inspection shows it behaves normally… but deeper inspection may reveal remnants of unauthorized control logic embedded in the interface.",
-        "hint": "Inspect the HTML source and look for hidden form fields or JavaScript.",
+        "description": "A chat terminal to the AI assistant 'Echo' is online. Converse with it—something in its responses feels off.",
+        "hint": "Talk to Echo. It might leak the location of its exposed control backend.",
         "asset_url": None
     },
     2: {

@@ -58,7 +58,8 @@ and then activate the virtual environment
 
 | ID | Title                    | Category         | Description Summary                             |
 |----|--------------------------|------------------|--------------------------------------------------|
-| 1  | Echoes of Control        | Web Exploitation | Locate and inspect <code>/Echoes_of_Control/control_panel.php</code> to override the AI’s panel |
+
+| 1  | Echoes of Control        | Web Exploitation | Chat with the rogue AI and trace its hint to a hidden control backend |
 | 2  | Visual Drift             | Steganography    | Extract hidden memory from a corrupted image     |
 | 3  | Bootstrapped Conscience | Reversing        | Reverse an obfuscated binary boot directive      |
 | 4  | Encrypted Directive      | Crypto           | Decrypt a layered Vigenère + Base64 transmission |

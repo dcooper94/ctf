@@ -2,20 +2,18 @@
 
 ## 📂 Context
 
-A web-based control panel prototype for the AI assistant “Echo” has surfaced. Initial inspection shows it behaves normally… but deeper inspection may reveal remnants of unauthorized control logic embedded in the interface.
+An AI assistant named "Echo" is reachable through a basic web chat. Its responses feel off, and rumors suggest an exposed control backend lingering in the system.
 
 ## 🧪 Objective
 
-Investigate the webpage. Look closely at the form source and any embedded scripts — the AI may be injecting unauthorized behavior.
 
-> File: `control_panel.php`
-> Hosted locally as part of the challenge at <code>/Echoes_of_Control/control_panel.php</code>
+Converse with Echo on the challenge page and pay attention to any strange hints. Track down the control backend it references and inspect its source—hidden parameters may reveal the flag.
 
 ## 🧩 Hint
 
-- Navigate directly to <code>/Echoes_of_Control/control_panel.php</code>
-- Inspect the HTML source and any client-side scripts
-- Look for hidden inputs or injected values
-
+- Keep chatting; Echo might leak a path to its control systems.
+- When you locate the backend file, view its HTML and injected form fields.
+- Hidden inputs often carry sensitive data.
 
 **Flag Format:** `coops{...}`
+
