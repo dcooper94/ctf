@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, send_from_directory
 import os
 import json
 from datetime import datetime
@@ -7,13 +7,18 @@ from datetime import datetime
 app = Flask(__name__)
 
 FLAG_DIR = "flags"
-SCOREBOARD_FILE = "logs/scoreboard.json"
 
+SCOREBOARD_FILE = "logs/scoreboard.json"
+def log_event(event_type, cid, user=None, status=None):
+    log_path = "logs/ctf_log.txt"
+    with open(log_path, "a") as log_file:
+        log_file.write(f"[{datetime.now()}] EVENT: {event_type} | CHALLENGE: {cid} | USER: {user or 'anonymous'} | STATUS: {status or 'N/A'}\n")
+        
 challenge_meta = {
     1: {
         "title": "Echoes of Control",
-        "description": "A web-based control panel prototype for the AI assistant 'Echo' has surfaced. Initial inspection shows it behaves normally… but deeper inspection may reveal remnants of unauthorized control logic embedded in the interface.",
-        "hint": "Inspect the HTML source and look for hidden form fields or JavaScript.",
+        "description": "A chat terminal to the AI assistant 'Echo' is online. Converse with it—something in its responses feels off.",
+        "hint": "Chat with Echo to find its control panel, then manipulate the panel's AI—prompt injection can reveal its hidden directive.",
         "asset_url": None
     },
     2: {
@@ -58,12 +63,14 @@ def home():
 @app.route("/challenge/<int:cid>", methods=["GET", "POST"])
 def challenge_page(cid):
     if cid not in challenge_meta:
+        log_event("ACCESS_FAIL", cid)
         return "Challenge not found", 404
 
+    log_event("ACCESS", cid)
     message = ""
     if request.method == "POST":
-        name = request.form.get("name").strip()
-        flag = request.form.get("flag").strip()
+        name = request.form.get("name", "").strip()
+        flag = request.form.get("flag", "").strip()
         correct_flag = get_flag(cid)
         scoreboard = load_scoreboard()
         key = f"challenge_{cid}"
@@ -74,17 +81,24 @@ def challenge_page(cid):
             if key not in scoreboard[name]:
                 scoreboard[name][key] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 save_scoreboard(scoreboard)
+            log_event("SUBMIT", cid, user=name, status="correct")
             message = "✅ Correct flag submitted!"
         else:
+            log_event("SUBMIT", cid, user=name, status="incorrect")
             message = "❌ Incorrect flag."
 
-    return render_template(f"challenge_{cid}.html", 
+    return render_template(
+        f"challenge_{cid}.html",
         title=challenge_meta[cid]["title"],
         description=challenge_meta[cid]["description"],
         hint=challenge_meta[cid]["hint"],
         asset_url=challenge_meta[cid]["asset_url"],
-        message=message
+        message=message,
     )
+
+@app.route("/Echoes_of_Control/control_panel.php")
+def echoes_control_panel():
+    return send_from_directory("Echoes_of_Control", "control_panel.php")
 
 @app.route("/scoreboard")
 def scoreboard():
@@ -93,4 +107,4 @@ def scoreboard():
     return render_template("scoreboard.html", scoreboard=sorted_scores)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
