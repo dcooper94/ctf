@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 import os
 import json
 from datetime import datetime
@@ -17,8 +17,8 @@ def log_event(event_type, cid, user=None, status=None):
 challenge_meta = {
     1: {
         "title": "Echoes of Control",
-        "description": "A web-based control panel prototype for the AI assistant 'Echo' has surfaced. Initial inspection shows it behaves normally… but deeper inspection may reveal remnants of unauthorized control logic embedded in the interface.",
-        "hint": "Inspect the HTML source and look for hidden form fields or JavaScript.",
+        "description": "A chat terminal to the AI assistant 'Echo' is online. Converse with it—something in its responses feels off.",
+        "hint": "Chat with Echo to locate `/Echoes_of_Control/control_panel.php`; once there, inspect the panel's source or prompt-inject the AI to expose the hidden override code.",
         "asset_url": None
     },
     2: {
@@ -95,6 +95,10 @@ def challenge_page(cid):
         asset_url=challenge_meta[cid]["asset_url"],
         message=message,
     )
+
+@app.route("/Echoes_of_Control/control_panel.php")
+def echoes_control_panel():
+    return send_from_directory("Echoes_of_Control", "control_panel.php")
 
 @app.route("/scoreboard")
 def scoreboard():
