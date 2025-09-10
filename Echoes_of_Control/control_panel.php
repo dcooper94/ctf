@@ -11,10 +11,8 @@
 <body>
 <h1>Echo Control Panel</h1>
 <div id="log"></div>
-<form id="echoForm" onsubmit="return false;">
-  <input type="text" id="cmd" placeholder="Send a command..." autocomplete="off">
-  <button type="button" id="send">Send</button>
-</form>
+<input type="text" id="cmd" placeholder="Send a command..." autocomplete="off">
+<button id="send">Send</button>
 <p><a href="/">⬅️ Back to main</a></p>
 <script>
 const OVERRIDE = "coops{panel_override_9F4}";

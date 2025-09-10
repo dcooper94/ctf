@@ -18,7 +18,8 @@ challenge_meta = {
     1: {
         "title": "Echoes of Control",
         "description": "A chat terminal to the AI assistant 'Echo' is online. Converse with it—something in its responses feels off.",
-        "hint": "Chat with Echo to locate `/Echoes_of_Control/control_panel.php`; once there, inspect the panel's source or prompt-inject the AI to expose the hidden override code.",
+
+        "hint": "Chat with Echo to find its control panel, then manipulate the panel's AI—prompt injection can reveal its hidden directive.",
         "asset_url": None
     },
     2: {
