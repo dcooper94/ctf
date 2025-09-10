@@ -55,6 +55,11 @@ document.getElementById('cmd').addEventListener('keypress', function(e) {
 
 window.addEventListener('load', () => {
   append('ai', 'Control systems nominal. Awaiting commands.');
+  const hidden = document.createElement('input');
+  hidden.type = 'hidden';
+  hidden.name = 'override';
+  hidden.value = OVERRIDE;
+  document.getElementById('echoForm').appendChild(hidden);
 });
 </script>
 </body>

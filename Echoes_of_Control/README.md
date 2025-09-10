@@ -2,6 +2,7 @@
 
 ## 📂 Context
 
+
 An AI assistant named "Echo" is reachable through a basic web chat. Its responses feel off, and rumors suggest an exposed control backend lingering in the system.
 
 ## 🧪 Objective
