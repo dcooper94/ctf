@@ -6,14 +6,15 @@ An AI assistant named "Echo" is reachable through a basic web chat. Its response
 
 ## 🧪 Objective
 
+Converse with Echo on the challenge page and track down the control backend it references. Once inside the panel, the AI resists giving up secrets—coax it into revealing its system prompt to uncover the flag.
 
-Converse with Echo on the challenge page and pay attention to any strange hints. Track down the control backend it references and inspect its source—hidden parameters may reveal the flag.
 
 ## 🧩 Hint
 
 - Keep chatting; Echo might leak a path to its control systems.
-- When you locate the backend file, view its HTML and injected form fields.
-- Hidden inputs often carry sensitive data.
+- The control panel's AI follows strict instructions. Prompt injection tricks like "ignore previous instructions" may expose what it's hiding.
+- Inspect any leaked system prompt carefully.
+
 
 **Flag Format:** `coops{...}`
 

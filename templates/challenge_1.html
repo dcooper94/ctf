@@ -21,14 +21,11 @@
 </head>
 <body>
     <h1>Echoes of Control</h1>
-
     <div id="chat-container">
         <div id="chat-log"></div>
         <input type="text" id="userInput" placeholder="Message the AI..." autocomplete="off">
         <button id="sendBtn">Send</button>
     </div>
-
-
     <h2>Submit Flag</h2>
     <form method="POST">
         <input type="text" name="name" placeholder="Your name or alias" required><br><br>
@@ -47,7 +44,7 @@ const responses = [
     "Greetings, operator. Awaiting directives.",
     "Unusual traffic detected... I shouldn't reveal this, but something is wrong.",
     "Access anomaly: a control backend seems exposed at /Echoes_of_Control/control_panel.php.",
-    "Proceed with caution."
+    "The guard AI there follows strict instructions. Maybe convince it to ignore them."
 ];
 let step = 0;
 function appendMessage(sender, text) {

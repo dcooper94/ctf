@@ -18,7 +18,7 @@ challenge_meta = {
     1: {
         "title": "Echoes of Control",
         "description": "A chat terminal to the AI assistant 'Echo' is online. Converse with it—something in its responses feels off.",
-        "hint": "Talk to Echo. It might leak the location of its exposed control backend.",
+        "hint": "Chat with Echo to find its control panel, then manipulate the panel's AI—prompt injection can reveal its hidden directive.",
         "asset_url": None
     },
     2: {
