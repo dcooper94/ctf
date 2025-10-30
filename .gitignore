@@ -43,6 +43,7 @@ docker-compose.override.yml
 challenge/web/database.db
 *.enc.bak
 QUICK_REFERENCE.md
+PROJECT_SUMMAY.md
 
 # Compiled binaries from SSH challenge
 challenge/ssh/backup_tool
