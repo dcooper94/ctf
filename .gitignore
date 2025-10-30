@@ -42,6 +42,7 @@ docker-compose.override.yml
 # Challenge specific - Runtime files only
 challenge/web/database.db
 *.enc.bak
+QUICK_REFERENCE.md
 
 # Compiled binaries from SSH challenge
 challenge/ssh/backup_tool
