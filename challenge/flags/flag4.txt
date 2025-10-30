@@ -1,0 +1,20 @@
+╔═══════════════════════════════════════════════════════════╗
+║                                                           ║
+║              ⚠️  ACCESS DENIED - HINT  ⚠️                 ║
+║                                                           ║
+║  Nice try! But simply reading files isn't enough...      ║
+║                                                           ║
+║  To truly escalate privileges, you need a ROOT SHELL.    ║
+║                                                           ║
+║  💡 HINT: The backup_tool accepts ANY input, including   ║
+║           special characters like semicolons (;)         ║
+║                                                           ║
+║  Try injecting a shell command:                          ║
+║    backup_tool "; /bin/bash -p"                          ║
+║                                                           ║
+║  The -p flag preserves privileges in bash!               ║
+║                                                           ║
+║  Once you have a root shell, explore /root/ for hidden   ║
+║  files (use: ls -la)                                     ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
