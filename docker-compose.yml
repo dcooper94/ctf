@@ -1,0 +1,15 @@
+services:
+  artemis-ctf:
+    build: .
+    container_name: rogue-ai-artemis
+    ports:
+      - "5000:5000"  # Web interface
+      - "2222:22"    # SSH access
+    restart: unless-stopped
+    hostname: artemis-system
+    networks:
+      - ctf-network
+
+networks:
+  ctf-network:
+    driver: bridge

@@ -1,0 +1,21 @@
+╔═══════════════════════════════════════════════════════════╗
+║                                                           ║
+║           🤖 ARTEMIS AI SYSTEM - SSH ACCESS 🤖            ║
+║                                                           ║
+║  You've successfully gained SSH access to the system!    ║
+║                                                           ║
+║  MISSION: Escalate your privileges to root and shut      ║
+║           down the rogue ARTEMIS AI core.                ║
+║                                                           ║
+║  💡 HINTS:                                                ║
+║  - Look for files in the current directory               ║
+║  - Check bash history for clues (.bash_history)          ║
+║  - Search for SUID binaries (special permissions)        ║
+║  - Try: find / -perm -4000 2>/dev/null                   ║
+║  - SUID binaries can be exploited for command injection  ║
+║                                                           ║
+║  🚩 Your goal: Get a ROOT SHELL (not just read files!)   ║
+║     Once you're root, explore /root/ for hidden files    ║
+║     Remember: ls -la shows ALL files (including hidden)  ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝

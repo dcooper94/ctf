@@ -1,0 +1,15 @@
+╔═══════════════════════════════════════════════════════════╗
+║                                                           ║
+║         🎉 CONGRATULATIONS! PRIVILEGE ESCALATION! 🎉      ║
+║                                                           ║
+║  You've successfully spawned a root shell!               ║
+║                                                           ║
+║  FLAG #4: CTF{pr1v1l3g3_3sc4l4t10n_pwn3d}                ║
+║                                                           ║
+║  Now you have the power to shut down ARTEMIS...          ║
+║  But first, you need to decrypt the shutdown codes!      ║
+║                                                           ║
+║  Look for: /root/artemis_shutdown.enc                    ║
+║  Decrypt with: python3 /root/decrypt_tool.py            ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝

@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Docker
+*.log
+docker-compose.override.yml
+
+# Challenge specific - Runtime files only
+challenge/web/database.db
+*.enc.bak
+
+# Compiled binaries from SSH challenge
+challenge/ssh/backup_tool
+challenge/ssh/vuln_binary
+
+# AI Assistant context (development only)
+.gemini/
+.claude/
+CLAUDE.md
