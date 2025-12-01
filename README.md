@@ -64,10 +64,10 @@ This project contains **intentional security vulnerabilities** designed for lear
 
 ```bash
 # Option 1: Using the deployment script
-./deploy.sh
+sudo ./deploy.sh
 
 # Option 2: Manual deployment
-docker-compose up -d --build
+sudo docker-compose up -d --build
 ```
 
 ### Access the Challenge
@@ -80,7 +80,7 @@ Once deployed, the challenge is accessible at:
 ### Stopping the Challenge
 
 ```bash
-docker-compose down
+sudo docker-compose down
 ```
 
 ---
@@ -138,7 +138,7 @@ docker-compose down
 #### 1. Single Shared Instance
 Perfect for small groups or workshops:
 ```bash
-./deploy.sh
+sudo ./deploy.sh
 # All players connect to the same instance
 ```
 
@@ -169,18 +169,18 @@ See `CTFD_SETUP.md` for detailed instructions on integrating with CTFd platforms
 
 ```bash
 # 1. Deploy the challenge
-./deploy.sh
+sudo ./deploy.sh
 
 # 2. Test all stages using SOLUTION.md
 
 # 3. Verify services are running
-docker ps
+sudo docker ps
 
 # 4. Check logs
-docker-compose logs -f
+sudo docker-compose logs -f
 
 # 5. Reset if needed
-docker-compose down && docker-compose up -d --build
+sudo docker-compose down && docker-compose up -d --build
 ```
 
 ---
@@ -196,7 +196,7 @@ Edit flags in the following files:
 
 Then rebuild:
 ```bash
-docker-compose down && docker-compose up -d --build
+sudo docker-compose down && docker-compose up -d --build
 ```
 
 ### Adjusting Difficulty
@@ -259,10 +259,10 @@ ctf/
 
 ```bash
 # Check logs for errors
-docker-compose logs
+sudo docker-compose logs
 
 # Verify Docker is running
-docker ps
+sudo docker ps
 ```
 
 ### Port Already in Use
@@ -279,28 +279,28 @@ ports:
 Wait 10-15 seconds after starting for the SSH service to fully initialize:
 ```bash
 # Check if container is running
-docker ps | grep artemis
+sudo docker ps | grep artemis
 
 # Access container directly
-docker exec -it rogue-ai-artemis bash
+sudo docker exec -it rogue-ai-artemis bash
 ```
 
 ### Web Interface Not Loading
 
 ```bash
 # Check Flask is running
-docker exec -it rogue-ai-artemis ps aux | grep python
+sudo docker exec -it rogue-ai-artemis ps aux | grep python
 
 # View application logs
-docker-compose logs -f
+sudo docker-compose logs -f
 ```
 
 ### Reset Challenge to Default State
 
 ```bash
 # Complete reset (rebuilds container)
-docker-compose down
-docker-compose up -d --build
+sudo docker-compose down
+sudo docker-compose up -d --build
 ```
 
 ---
@@ -394,7 +394,7 @@ Created for beginner CTF players learning cybersecurity fundamentals.
 
 ```bash
 # Deploy the challenge
-./deploy.sh
+sudo ./deploy.sh
 
 # Open in browser
 http://localhost:5000
