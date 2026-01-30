@@ -112,7 +112,7 @@ backup_tool "; /bin/bash"
 
 ### Files to Upload
 You can attach these files to the challenge in CTFd:
-- `PLAYER_GUIDE.md` - Complete player walkthrough
+- `SOLUTION.md (organizers only)` - Complete player walkthrough
 - `deploy.sh` - Deployment script (for reference)
 
 ### Tags
@@ -246,7 +246,7 @@ After the competition:
 
 ## Additional Resources
 
-- Player Guide: `PLAYER_GUIDE.md`
+- Player Guide: `SOLUTION.md (organizers only)`
 - Solution Walkthrough: `SOLUTION.md`
 - Technical Documentation: `README.md`
 

@@ -126,8 +126,8 @@ sudo docker-compose down
 ### Need Help?
 
 - **Hints are built into the challenge** - read carefully!
-- **Check `PLAYER_GUIDE.md`** for detailed walkthrough with hints
-- **Stuck?** The guide includes troubleshooting and common solutions
+- **Check NOTES.txt** in the SSH challenge for hints about privilege escalation
+- **Organizers:** A complete SOLUTION.md file is available locally (not in public repo)
 
 ---
 
@@ -226,8 +226,6 @@ sudo docker-compose down && docker-compose up -d --build
 ```
 ctf/
 ├── README.md                      # This file
-├── PLAYER_GUIDE.md               # Detailed walkthrough with hints
-├── SOLUTION.md                   # Complete solution (organizers only)
 ├── CTFD_SETUP.md                 # CTFd platform integration guide
 │
 ├── docker-compose.yml            # Easy deployment configuration
@@ -385,7 +383,8 @@ Created for beginner CTF players learning cybersecurity fundamentals.
 ## 📞 Support
 
 - **Issues?** Check the Troubleshooting section above
-- **Questions?** Review `PLAYER_GUIDE.md` and `SOLUTION.md`
+- **Players stuck?** Hints are built into the challenge (check NOTES.txt, HTML comments, etc.)
+- **Organizers:** Complete solution walkthrough available in SOLUTION.md (local only)
 - **Customization help?** See the Customization section
 
 ---
