@@ -65,3 +65,6 @@ challenge/web/flask.log
 # Temporary test files
 test_*.py
 scratch.*
+
+# Solution guide (keep private, share selectively)
+SOLUTION.md
