@@ -75,7 +75,7 @@ sudo docker-compose up -d --build
 Once deployed, the challenge is accessible at:
 
 - **🌐 Web Interface:** `http://localhost:5000`
-- **🔐 SSH Access:** `ssh ctfuser@localhost -p 2222` (credentials to be discovered during the challenge)
+- **🔐 SSH Access:** `ssh ?????@localhost -p 2222` (credentials to be discovered during the challenge)
 
 ### Stopping the Challenge
 
