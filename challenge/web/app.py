@@ -110,8 +110,24 @@ def files():
         # Show hidden config file only to admins
         files_list = [
             {'name': 'readme.txt', 'content': 'ARTEMIS System Files - Authorized Personnel Only'},
-            {'name': 'config.bak', 'content': 'SSH Access:\nUsername: ctfuser\nPassword: artemis2024\n\nFlag: CTF{ssh_4cc3ss_gr4nt3d}'},
-            {'name': 'diagnostics.log', 'content': 'System diagnostics running...'},
+            {'name': 'config.bak', 'content': '''⚠️ FILE CORRUPTED BY ARTEMIS AI ⚠️
+============================================
+
+ERROR: Data encryption protocol activated
+Status: LOCKED by AI security system
+
+Encrypted SSH Configuration:
+----------------------------
+SSH_HOST: localhost
+SSH_PORT: 2222
+SSH_USER: Y3RmdXNlcg==
+SSH_PASS: YXJ0ZW1pczIwMjQ=
+
+HINT: ARTEMIS uses standard encoding protocols.
+      Common base encodings are easily reversed...
+
+⚠️ ARTEMIS is watching... decrypt at your own risk.'''},
+            {'name': 'diagnostics.log', 'content': 'System diagnostics running...\nLast backup: 2024-10-29 15:30:00\nStatus: All systems nominal'},
         ]
     else:
         files_list = [

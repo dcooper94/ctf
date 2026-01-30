@@ -4,6 +4,8 @@
 ║                                                           ║
 ║  You've successfully gained SSH access to the system!    ║
 ║                                                           ║
+║  🚩 FLAG #3: CTF{ssh_4cc3ss_gr4nt3d}                     ║
+║                                                           ║
 ║  MISSION: Escalate your privileges to root and shut      ║
 ║           down the rogue ARTEMIS AI core.                ║
 ║                                                           ║
