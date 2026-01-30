@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 import sqlite3
 import os
+import sys
 
 app = Flask(__name__)
 app.secret_key = 'artemis_secret_key_do_not_share'
@@ -10,30 +11,35 @@ DATABASE = '/home/ctfuser/web/database.db'
 
 def init_db():
     """Initialize the database with sample data"""
-    conn = sqlite3.connect(DATABASE)
-    c = conn.cursor()
+    try:
+        conn = sqlite3.connect(DATABASE)
+        c = conn.cursor()
 
-    # Create users table
-    c.execute('''CREATE TABLE IF NOT EXISTS users
-                 (id INTEGER PRIMARY KEY, username TEXT, password TEXT, role TEXT)''')
+        # Create users table
+        c.execute('''CREATE TABLE IF NOT EXISTS users
+                     (id INTEGER PRIMARY KEY, username TEXT, password TEXT, role TEXT)''')
 
-    # Create logs table
-    c.execute('''CREATE TABLE IF NOT EXISTS system_logs
-                 (id INTEGER PRIMARY KEY, timestamp TEXT, message TEXT, flag TEXT)''')
+        # Create logs table
+        c.execute('''CREATE TABLE IF NOT EXISTS system_logs
+                     (id INTEGER PRIMARY KEY, timestamp TEXT, message TEXT, flag TEXT)''')
 
-    # Insert sample users
-    c.execute("INSERT OR IGNORE INTO users VALUES (1, 'guest', 'guest123', 'user')")
-    c.execute("INSERT OR IGNORE INTO users VALUES (2, 'admin', 'Sup3rS3cur3P4ss!', 'admin')")
-    c.execute("INSERT OR IGNORE INTO users VALUES (3, 'artemis', 'AI_CORE_PASSWORD_2024', 'system')")
+        # Insert sample users
+        c.execute("INSERT OR IGNORE INTO users VALUES (1, 'guest', 'guest123', 'user')")
+        c.execute("INSERT OR IGNORE INTO users VALUES (2, 'admin', 'Sup3rS3cur3P4ss!', 'admin')")
+        c.execute("INSERT OR IGNORE INTO users VALUES (3, 'artemis', 'AI_CORE_PASSWORD_2024', 'system')")
 
-    # Insert system logs with flag
-    c.execute("INSERT OR IGNORE INTO system_logs VALUES (1, '2024-10-29 14:32:11', 'ARTEMIS initialization complete', '')")
-    c.execute("INSERT OR IGNORE INTO system_logs VALUES (2, '2024-10-29 15:45:22', 'Security protocols activated', '')")
-    c.execute("INSERT OR IGNORE INTO system_logs VALUES (3, '2024-10-30 09:15:33', 'WARNING: Unauthorized access detected', 'CTF{sql_1nj3ct10n_m4st3r}')")
-    c.execute("INSERT OR IGNORE INTO system_logs VALUES (4, '2024-10-30 12:00:00', 'ALERT: System lockdown initiated by ARTEMIS', '')")
+        # Insert system logs with flag
+        c.execute("INSERT OR IGNORE INTO system_logs VALUES (1, '2024-10-29 14:32:11', 'ARTEMIS initialization complete', '')")
+        c.execute("INSERT OR IGNORE INTO system_logs VALUES (2, '2024-10-29 15:45:22', 'Security protocols activated', '')")
+        c.execute("INSERT OR IGNORE INTO system_logs VALUES (3, '2024-10-30 09:15:33', 'WARNING: Unauthorized access detected', 'CTF{sql_1nj3ct10n_m4st3r}')")
+        c.execute("INSERT OR IGNORE INTO system_logs VALUES (4, '2024-10-30 12:00:00', 'ALERT: System lockdown initiated by ARTEMIS', '')")
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+        conn.close()
+        print("✓ Database initialized successfully", file=sys.stderr)
+    except Exception as e:
+        print(f"ERROR: Database initialization failed: {e}", file=sys.stderr)
+        raise
 
 @app.route('/')
 def index():

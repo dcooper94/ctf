@@ -9,7 +9,14 @@
 ║  Now you have the power to shut down ARTEMIS...          ║
 ║  But first, you need to decrypt the shutdown codes!      ║
 ║                                                           ║
-║  Look for: /root/artemis_shutdown.enc                    ║
-║  Decrypt with: python3 /root/decrypt_tool.py            ║
+║  Steps:                                                   ║
+║  1. Find the decryption key hidden in /root/             ║
+║     Hint: Look for files with 'key' in the name          ║
+║     Command: ls -la /root/ | grep -i key                 ║
+║                                                           ║
+║  2. Read the key file to get the decryption key          ║
+║                                                           ║
+║  3. Decrypt the shutdown codes:                          ║
+║     python3 /root/decrypt_tool.py <key>                  ║
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝

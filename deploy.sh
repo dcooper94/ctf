@@ -5,6 +5,17 @@ echo "  ROGUE.AI CTF Challenge - Deployment"
 echo "========================================"
 echo ""
 
+# Check if running with appropriate privileges
+if [ "$EUID" -ne 0 ] && ! groups | grep -q docker; then
+    echo "⚠️  Warning: This script requires either:"
+    echo "   - Running with sudo: sudo ./deploy.sh"
+    echo "   - User in docker group: sudo usermod -aG docker $USER"
+    echo ""
+    echo "Current user: $(whoami)"
+    echo "Current groups: $(groups)"
+    exit 1
+fi
+
 # Check if Docker is installed
 if ! command -v docker &> /dev/null; then
     echo "❌ Error: Docker is not installed"

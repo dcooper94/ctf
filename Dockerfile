@@ -52,10 +52,12 @@ COPY challenge/flags/flag4.txt /root/flag4.txt
 COPY challenge/flags/.flag4.txt /root/.flag4.txt
 COPY challenge/flags/artemis_shutdown.enc /root/artemis_shutdown.enc
 COPY challenge/flags/decrypt_tool.py /root/decrypt_tool.py
+COPY challenge/flags/decryption.key /root/decryption.key
 RUN chmod 600 /root/flag4.txt && \
     chmod 600 /root/.flag4.txt && \
     chmod 600 /root/artemis_shutdown.enc && \
-    chmod 700 /root/decrypt_tool.py
+    chmod 700 /root/decrypt_tool.py && \
+    chmod 600 /root/decryption.key
 
 # Expose ports
 EXPOSE 22 5000

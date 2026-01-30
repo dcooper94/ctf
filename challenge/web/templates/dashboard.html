@@ -121,6 +121,17 @@
             <div class="status-item">🔴 Access Level: LIMITED - Administrative functions restricted</div>
         </div>
 
+        {% if role == 'user' %}
+        <div style="background: rgba(255, 165, 0, 0.2); border: 2px solid #ff9900; border-radius: 10px; padding: 20px; margin-bottom: 20px; color: #ff9900;">
+            <h3>⚠️ LIMITED ACCESS DETECTED</h3>
+            <p>You are logged in as <strong>{{ username }}</strong> with <strong>USER</strong> role.</p>
+            <p>Some files and logs may be restricted to administrator accounts.</p>
+            <p><br><strong>💡 HINT:</strong> SQL injection can target specific users, not just bypass authentication.</p>
+            <p>Try modifying your injection to access an administrator account like 'admin'.</p>
+            <p>Example: <code style="background: rgba(0,0,0,0.5); padding: 2px 5px;">admin' --</code></p>
+        </div>
+        {% endif %}
+
         <div class="nav">
             <a href="/logs" class="nav-card">
                 <h2>📋 System Logs</h2>

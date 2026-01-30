@@ -53,3 +53,15 @@ challenge/ssh/vuln_binary
 .gemini/
 .claude/
 CLAUDE.md
+IMPROVEMENTS_APPLIED.md
+
+# Analysis/testing notes (optional - keep if useful for maintainers)
+CTF_ANALYSIS_REPORT.md
+
+# Flask runtime files
+challenge/web/flask.log
+*.log
+
+# Temporary test files
+test_*.py
+scratch.*

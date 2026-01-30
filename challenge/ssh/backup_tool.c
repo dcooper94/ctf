@@ -23,7 +23,8 @@ int main(int argc, char *argv[]) {
     }
 
     // VULNERABLE: No input sanitization - command injection possible
-    strcpy(filename, argv[1]);
+    strncpy(filename, argv[1], sizeof(filename) - 1);
+    filename[sizeof(filename) - 1] = '\0';
     sprintf(command, "cat %s 2>/dev/null || echo 'File not found'", filename);
 
     printf("Backing up: %s\n\n", filename);

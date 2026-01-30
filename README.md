@@ -25,8 +25,8 @@ This is a **complete, standalone CTF challenge** designed to teach real-world ha
 
 ### 🏆 Challenge Stats
 
-- **Difficulty:** Beginner to Intermediate
-- **Duration:** 1-2 hours for beginners
+- **Difficulty:** Beginner
+- **Duration:** 30-90 minutes for beginners (5-15 minutes for experienced players)
 - **Flags:** 5 progressive challenges
 - **Format:** `CTF{...}`
 - **Environment:** Fully containerized with Docker
