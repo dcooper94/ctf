@@ -9,6 +9,15 @@ app.secret_key = 'artemis_secret_key_do_not_share'
 
 DATABASE = '/home/ctfuser/web/database.db'
 
+# Flag definitions
+FLAGS = {
+    'flag1': 'CTF{w3lc0me_to_th3_syst3m}',
+    'flag2': 'CTF{sql_1nj3ct10n_m4st3r}',
+    'flag3': 'CTF{ssh_4cc3ss_gr4nt3d}',
+    'flag4': 'CTF{pr1v1l3g3_3sc4l4t10n_pwn3d}',
+    'flag5': 'CTF{4rt3m1s_shutd0wn_c0mpl3t3}',
+}
+
 def init_db():
     """Initialize the database with sample data"""
     try:
@@ -33,6 +42,12 @@ def init_db():
         c.execute("INSERT OR IGNORE INTO system_logs VALUES (2, '2024-10-29 15:45:22', 'Security protocols activated', '')")
         c.execute("INSERT OR IGNORE INTO system_logs VALUES (3, '2024-10-30 09:15:33', 'WARNING: Unauthorized access detected', 'CTF{sql_1nj3ct10n_m4st3r}')")
         c.execute("INSERT OR IGNORE INTO system_logs VALUES (4, '2024-10-30 12:00:00', 'ALERT: System lockdown initiated by ARTEMIS', '')")
+
+        # Create submissions table
+        c.execute('''CREATE TABLE IF NOT EXISTS submissions
+                     (id INTEGER PRIMARY KEY, username TEXT, flag_key TEXT, flag_value TEXT, timestamp TEXT)''')
+
+        conn.commit()
 
         conn.commit()
         conn.close()
@@ -137,11 +152,109 @@ HINT: ARTEMIS uses standard encoding protocols.
 
     return render_template('files.html', files=files_list)
 
+@app.route('/leaderboard')
+def leaderboard():
+    """Display leaderboard with user rankings"""
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
+
+    # Get leaderboard data: username, flag count, first submission time, flags captured
+    c.execute('''
+        SELECT
+            username,
+            COUNT(DISTINCT flag_key) as flag_count,
+            MIN(timestamp) as first_flag_time,
+            GROUP_CONCAT(flag_key, ', ') as flags_captured
+        FROM submissions
+        GROUP BY username
+        ORDER BY flag_count DESC, first_flag_time ASC
+    ''')
+
+    leaderboard_data = c.fetchall()
+    conn.close()
+
+    # Format data for template
+    rankings = []
+    for idx, (username, flag_count, first_time, flags) in enumerate(leaderboard_data, 1):
+        rankings.append({
+            'rank': idx,
+            'username': username,
+            'flag_count': flag_count,
+            'first_time': first_time,
+            'flags': flags,
+            'is_current_user': username == session['username']
+        })
+
+    return render_template('leaderboard.html', rankings=rankings, total_flags=len(FLAGS))
+
 @app.route('/logout')
 def logout():
     """Logout and clear session"""
     session.clear()
     return redirect(url_for('index'))
+
+@app.route('/submit', methods=['GET', 'POST'])
+def submit():
+    """Flag submission endpoint with confetti effect"""
+    if 'username' not in session:
+        return redirect(url_for('index'))
+
+    if request.method == 'POST':
+        player_name = request.form.get('username', '').strip()
+        flag_key = request.form.get('flag_key', '').strip()
+        flag_value = request.form.get('flag_value', '').strip()
+
+        # Validate player name
+        if not player_name or len(player_name) < 2 or len(player_name) > 30:
+            return render_template('submit.html', success=False,
+                                  error='Username must be between 2-30 characters',
+                                  player_name=session.get('player_name', ''))
+
+        # Save player name to session for future submissions
+        session['player_name'] = player_name
+
+        # Normalize flag_key: accept "1", "flag 1", "flag1" -> all become "flag1"
+        flag_key = flag_key.lower().replace(' ', '')
+        if flag_key.isdigit():
+            flag_key = f'flag{flag_key}'
+
+        # Debug logging
+        print(f"DEBUG: Player='{player_name}' flag_key='{flag_key}', flag_value='{flag_value}'", file=sys.stderr)
+        print(f"DEBUG: Expected value for {flag_key}: '{FLAGS.get(flag_key, 'KEY NOT FOUND')}'", file=sys.stderr)
+        print(f"DEBUG: Match result: {flag_key in FLAGS and FLAGS[flag_key] == flag_value}", file=sys.stderr)
+
+        # Validate flag
+        if flag_key in FLAGS and FLAGS[flag_key] == flag_value:
+            # Check if this player already submitted this flag
+            conn = sqlite3.connect(DATABASE)
+            c = conn.cursor()
+            c.execute('SELECT * FROM submissions WHERE username=? AND flag_key=?',
+                      (player_name, flag_key))
+            existing = c.fetchone()
+
+            if existing:
+                conn.close()
+                return render_template('submit.html', success=False,
+                                      error=f'You already submitted {flag_key}!',
+                                      player_name=player_name)
+
+            # Save submission
+            c.execute('''INSERT INTO submissions (username, flag_key, flag_value, timestamp)
+                         VALUES (?, ?, ?, datetime('now'))''',
+                      (player_name, flag_key, flag_value))
+            conn.commit()
+            conn.close()
+
+            return render_template('submit.html', success=True, flag_key=flag_key,
+                                 flag_value=flag_value, player_name=player_name)
+        else:
+            return render_template('submit.html', success=False, error='Invalid flag',
+                                 player_name=player_name)
+
+    return render_template('submit.html', success=None, player_name=session.get('player_name', ''))
 
 if __name__ == '__main__':
     # Initialize database on startup

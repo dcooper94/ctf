@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARTEMIS - Flag Submission</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #00ff00;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        .subtitle {
+            text-align: center;
+            color: #ff0000;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            background: #000;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #00ff00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #00cc00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        .error {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .success {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .flag-display {
+            text-align: center;
+            margin-top: 20px;
+            color: #00ffff;
+            font-weight: bold;
+            word-break: break-all;
+            padding: 15px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+        }
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        .confetti {
+            position: absolute;
+            font-size: 20px;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+        .back-btn {
+            display: block;
+            margin: 20px auto 0;
+            width: auto;
+            padding: 10px 30px;
+            background: #00ff00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .back-btn:hover {
+            background: #00cc00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚠ FLAG SUBMISSION ⚠</h1>
+        <div class="subtitle">Submit your discovered flags to ARTEMIS</div>
+
+        {% if success %}
+            <div class="success">
+                🎉 CORRECT FLAG! 🎉<br>
+                <span style="font-size: 0.8em">{{ flag_key }} verified</span>
+            </div>
+            <div class="flag-display">{{ flag_value }}</div>
+            <a href="/submit" class="back-btn">Submit Another Flag</a>
+        {% else %}
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST">
+                <div class="form-group">
+                    <label for="username">Your Username/Alias:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your hacker alias" value="{{ player_name }}" required>
+                    <small style="color: #888; font-size: 0.8em;">This name will appear on the leaderboard</small>
+                </div>
+                <div class="form-group">
+                    <label for="flag_key">Flag Number:</label>
+                    <input type="text" id="flag_key" name="flag_key" placeholder="1, flag1, or flag 1" required>
+                    <small style="color: #888; font-size: 0.8em;">Accepts: 1, 2, 3 OR flag1, flag2, flag3</small>
+                </div>
+                <div class="form-group">
+                    <label for="flag_value">Flag Value:</label>
+                    <input type="text" id="flag_value" name="flag_value" placeholder="CTF{...}" required>
+                </div>
+                <button type="submit">SUBMIT FLAG</button>
+            </form>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <a href="/leaderboard" class="back-btn" style="flex: 1; text-align: center;">🏆 View Leaderboard</a>
+                <a href="/dashboard" class="back-btn" style="flex: 1; text-align: center;">← Dashboard</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="confetti-container" id="confetti-container"></div>
+
+    <script>
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8800', '#00ff88'];
+            const symbols = ['*', '+', 'x', 'o', '@', '#', '%', '&'];
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-20px';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.style.opacity = Math.random() * 0.5 + 0.5;
+                confetti.style.fontSize = (Math.random() * 20 + 10) + 'px';
+
+                container.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        {% if success %}
+        createConfetti();
+        {% endif %}
+    </script>
+</body>
+</html>
