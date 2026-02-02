@@ -75,6 +75,8 @@ sudo docker-compose up -d --build
 Once deployed, the challenge is accessible at:
 
 - **🌐 Web Interface:** `http://localhost:5000`
+- **🚩 Flag Submission:** `http://localhost:5000/submit`
+- **🏆 Leaderboard:** `http://localhost:5000/leaderboard`
 - **🔐 SSH Access:** `ssh ?????@localhost -p 2222` (credentials to be discovered during the challenge)
 
 ### Stopping the Challenge
@@ -92,7 +94,16 @@ sudo docker-compose down
 1. **Access the web portal** at `http://localhost:5000`
 2. **Find the first flag** - it's visible on the main page!
 3. **Explore and exploit** - use your hacking skills to progress through 5 stages
-4. **Submit flags** in the format `CTF{...}`
+4. **Submit flags** at `http://localhost:5000/submit`:
+   - Enter your **hacker alias** (this appears on the leaderboard)
+   - Enter flag number: `1`, `flag1`, or `flag 1` (flexible format)
+   - Enter the flag value: `CTF{...}`
+5. **Track your progress** on the leaderboard at `http://localhost:5000/leaderboard`
+
+> **💡 Pro Tips:**
+> - Choose a unique username/alias for the leaderboard (not tied to your login account)
+> - Flag numbers accept flexible formats: "1", "flag1", or "flag 1"
+> - Your username is saved - you only need to enter it once!
 
 ### Challenge Progression
 

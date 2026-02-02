@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARTEMIS - Leaderboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #00ff00;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            text-shadow: 0 0 10px #00ff00;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #ffff00;
+            font-size: 0.9em;
+        }
+        .leaderboard-table {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            border-bottom: 2px solid #00ff00;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+        }
+        tr:hover {
+            background: rgba(0, 255, 0, 0.1);
+        }
+        tr.current-user {
+            background: rgba(255, 255, 0, 0.2);
+            border-left: 4px solid #ffff00;
+        }
+        tr.current-user td {
+            color: #ffff00;
+            font-weight: bold;
+        }
+        .rank {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            width: 80px;
+        }
+        .rank-1 {
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
+        }
+        .rank-2 {
+            color: #c0c0c0;
+            text-shadow: 0 0 10px #c0c0c0;
+        }
+        .rank-3 {
+            color: #cd7f32;
+            text-shadow: 0 0 10px #cd7f32;
+        }
+        .flags-captured {
+            font-size: 0.85em;
+            color: #00ffff;
+        }
+        .progress-bar {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            height: 20px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #00ff00, #00cc00);
+            height: 100%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75em;
+            color: #000;
+            font-weight: bold;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: #00ff00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: #00cc00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+        .timestamp {
+            font-size: 0.85em;
+            color: #888;
+        }
+        @media (max-width: 768px) {
+            th, td {
+                padding: 10px 5px;
+                font-size: 0.85em;
+            }
+            .flags-captured {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 LEADERBOARD 🏆</h1>
+            <div class="subtitle">Top Hackers in the ARTEMIS Challenge</div>
+        </div>
+
+        <div class="leaderboard-table">
+            {% if rankings %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Flags Captured</th>
+                            <th>Progress</th>
+                            <th class="flags-captured">Flags</th>
+                            <th>First Flag</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for player in rankings %}
+                        <tr {% if player.is_current_user %}class="current-user"{% endif %}>
+                            <td class="rank {% if player.rank == 1 %}rank-1{% elif player.rank == 2 %}rank-2{% elif player.rank == 3 %}rank-3{% endif %}">
+                                {% if player.rank == 1 %}🥇
+                                {% elif player.rank == 2 %}🥈
+                                {% elif player.rank == 3 %}🥉
+                                {% else %}#{{ player.rank }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ player.username }}
+                                {% if player.is_current_user %}<span style="color: #ffff00;"> (You)</span>{% endif %}
+                            </td>
+                            <td>{{ player.flag_count }} / {{ total_flags }}</td>
+                            <td style="width: 200px;">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: {{ (player.flag_count / total_flags * 100)|int }}%">
+                                        {{ (player.flag_count / total_flags * 100)|int }}%
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="flags-captured">{{ player.flags }}</td>
+                            <td class="timestamp">{{ player.first_time }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="empty-state">
+                    <h2>No submissions yet!</h2>
+                    <p>Be the first to capture a flag and claim the top spot!</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <a href="/submit" class="back-btn" style="flex: 1; text-align: center;">🚩 Submit Flag</a>
+            <a href="/dashboard" class="back-btn" style="flex: 1; text-align: center;">← Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

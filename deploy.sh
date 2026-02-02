@@ -44,7 +44,31 @@ echo "Building and starting the CTF challenge..."
 echo "This may take a few minutes on first run..."
 echo ""
 
-docker-compose up -d --build
+# Hide build output and show progress indicator
+(
+    docker-compose up -d --build > /tmp/ctf-build.log 2>&1
+) &
+BUILD_PID=$!
+
+# Show spinner while building
+spin='-\|/'
+i=0
+while kill -0 $BUILD_PID 2>/dev/null; do
+    i=$(( (i+1) %4 ))
+    printf "\r[${spin:$i:1}] Building container... "
+    sleep 0.1
+done
+wait $BUILD_PID
+BUILD_EXIT=$?
+
+printf "\r✓ Build complete!                    \n"
+
+if [ $BUILD_EXIT -ne 0 ]; then
+    echo ""
+    echo "❌ Build failed. Showing last 20 lines of build log:"
+    tail -20 /tmp/ctf-build.log
+    exit 1
+fi
 
 # Wait for services to start
 echo ""
